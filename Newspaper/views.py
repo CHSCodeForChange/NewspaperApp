@@ -14,7 +14,8 @@ def viewPaper(request, paper_id):
     if request.user.is_authenticated():
         paper = Paper.objects.get(id=paper_id)
         if (paper.owner == request.user):
-            return render(request, 'HTML FILE', {'papers': papers})
+            sections = Section.objects.filter(parentPaper=paper)
+            return render(request, 'papers/display_paper.html', {'paper': paper, 'sections':sections})
         else:
             return redirect('/login')
     else:
@@ -48,21 +49,53 @@ def createPaper(request):
     else:
         return redirect('/login')
 
-def addSection(request, paper_id):
+def deletePaper(request, paper_id):
     if request.user.is_authenticated():
         paper = Paper.objects.get(id=paper_id)
         if (paper.owner == request.user):
-            return render(request, 'HTML FILE', {'papers': papers})
+            paper.delete()
+            return redirect('/papers')
         else:
             return redirect('/login')
+    else:
+        return redirect('/login')
+
+def addSection(request, paper_id):
+    if request.user.is_authenticated():
+        paper = Paper.objects.get(id=paper_id)
+        if (request.method == 'POST'):
+            form = NewSectionForm(request.POST)
+            if form.is_valid():
+                section = form.save(commit=False)
+                section.parentPaper = paper
+                section.save()
+
+                return redirect('/papers/'+str(paper.id))
+        else:
+            form = NewSectionForm()
+        # Filter this by single slot events in the future
+        return render(request, 'papers/add_section.html', {'form': form})
+
     else:
         return redirect('/login')
 
 def editSection(request, section_id):
     if request.user.is_authenticated():
         section = Section.objects.get(id=section_id)
-        if (seciton.parentPaper.owner == request.user):
+        if (section.parentPaper.owner == request.user):
             return render(request, 'HTML FILE', {'section': section})
+        else:
+            return redirect('/login')
+    else:
+        return redirect('/login')
+
+
+def deleteSection(request, section_id):
+    if request.user.is_authenticated():
+        section = Section.objects.get(id=section_id)
+        if (section.parentPaper.owner == request.user):
+            section.delete()
+            return redirect('/papers/'+str(section.parentPaper.id))
         else:
             return redirect('/login')
     else:

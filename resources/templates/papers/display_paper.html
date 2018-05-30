@@ -1,0 +1,100 @@
+{% extends "header.html" %}
+
+{% block content %}
+
+<div class="jumbotron" style="margin-top: 5%">
+
+
+    <h1 class="display-1">{{paper.name}}</h1>
+    <h4 class="lead" style="font-size: 200%"><a href={{paper.website}}>{{paper.website}}</a></h4>
+
+    <div id="accordion" role="tablist">
+        <div class="card">
+            <div class="card-header" role="tab" id="headingOne">
+                <h5 class="mb-0">
+                    <a data-toggle="collapse" href="#collapseOne" role="button" aria-expanded="true"
+                       aria-controls="collapseOne">
+                        {{paper.school}}: {{paper.city}}, {{paper.state}}
+                    </a>
+                </h5>
+            </div>
+
+            <div id="collapseOne" class="collapse toggle" role="tabpanel" aria-labelledby="headingOne"
+                 data-parent="#accordion">
+
+                <div class="embed-responsive embed-responsive-16by9">
+                    <iframe class="embed-responsive-item"
+                            src="https://www.google.com/maps/embed/v1/search?q={{paper.school}} {{state.city}} {{paper.state}}&key=AIzaSyB-YQD-s4ery8KQRnzX7FhZsBC4SeFRcjA"
+                            allowfullscreen></iframe>
+                </div>
+
+                <p class="text-danger">Map will only function correctly if a valid location has been entered</p>
+            </div>
+        </div>
+
+        <h1></h1>
+        <p class="text-left" style="font-size: 150%">{{paper.description}}</p>
+    </div>
+
+    <div class="row">
+        <a class="col-sm-9" href="edit">
+            <button class="btn btn-info btn-block">
+              Edit <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+            </button>
+        </a>
+
+        <div class="btn-group col-sm-3">
+            <button class="btn btn-danger btn-block dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Delete <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+            <div class="dropdown-menu">
+                <p class="dropdown-item" href="">Are you sure?</p>
+                <a class="dropdown-item"
+                   href="delete">
+                    <button class="btn btn-danger">Yes</button>
+                </a>
+            </div>
+        </div>
+    </div>
+  </div>
+
+
+
+
+  <h1>Sections
+    <a class="plus" href="section/add">
+      +
+    </a>
+  </h1>
+
+  <div class="table-responsive">
+    <table class="table table-hover" style="margin:20px;">
+        <tr>
+          <th>Name</th>
+          <th>Wordpress Tag</th>
+          <th>Edit</th>
+          <th>Delete</th>
+        </tr>
+        <tbody>
+        {% for section in sections %}
+        <tr>
+            <td><a href="/volunteer/slot/{{slot.id}}">{{section.name}}</a></td>
+            <td><a href="{{paper.website}}/category/{{section.wordpressTag}}">{{section.wordpressTag}}</a></td>
+            <td><button class="btn btn-info"> <a href="section/{{section.id}}/edit" style="color: white">Edit</a></button></td>
+            <td>
+              <div class="btn-group">
+                  <button class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Delete</button>
+                  <div class="dropdown-menu">
+                      <p class="dropdown-item" href="">Are you sure?</p>
+                      <a class="dropdown-item"
+                         href="/papers/section/{{section.id}}/delete">
+                          <button class="btn btn-danger">Yes</button>
+                      </a>
+                  </div>
+              </div>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+  </div>
+
+{% endblock %}

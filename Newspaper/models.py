@@ -34,7 +34,7 @@ class Section(models.Model):
     parentPaper = models.ForeignKey(
         Paper,
         on_delete=models.CASCADE,
-        null=False,
+        null=True,
     )
 
     #this is the actual name of the section

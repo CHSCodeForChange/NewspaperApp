@@ -11,9 +11,13 @@ class NewPaperForm(forms.Form):
     school = forms.CharField(label='School', widget=forms.TextInput(
         attrs={'type': 'text',
                'class': 'form-control'}))
-    description = forms.CharField(label='description', widget=forms.TextInput(
-        attrs={'type': 'text',
-               'class': 'form-control'}))
+    description = forms.CharField(label='description', max_length=360, widget=forms.Textarea(
+        attrs={
+            'type': 'text',
+            'class': 'form-control',
+            'rows': 5,
+            'style': 'resize:none;',
+        }))
     website = forms.URLField(label='Website URL', widget=forms.URLInput(
             attrs={'class': 'form-control'}))
     city = forms.CharField(label='City', max_length=240, widget=forms.TextInput(
@@ -39,3 +43,24 @@ class NewPaperForm(forms.Form):
         )
 
         return paper
+
+class NewSectionForm(forms.Form):
+    name = forms.CharField(label='Name', max_length=30, widget=forms.TextInput(
+        attrs={'type': 'text',
+               'class': 'form-control'}))
+    wordpressTag = forms.CharField(label='Wordpress Tag', widget=forms.TextInput(
+        attrs={'type': 'text',
+               'class': 'form-control'}))
+
+
+    def __init__(self, *args, **kwargs):
+        super(NewSectionForm, self).__init__(*args, **kwargs)
+
+
+    def save(self, commit=True):
+        section = Section(
+            name=self.cleaned_data['name'],
+            wordpressTag=self.cleaned_data['wordpressTag'],
+        )
+
+        return section
