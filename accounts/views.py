@@ -18,7 +18,7 @@ from django.views.generic.edit import UpdateView
 
 # Redirects to the profile page
 def home(request):
-    redirect('accounts/profile')
+    redirect('/paper')
 
 # The signup page
 def signup(request):

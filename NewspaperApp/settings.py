@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'accounts',
+    'Newspaper',
 ]
 
 MIDDLEWARE = [
@@ -130,5 +131,5 @@ CSRF_COOKIE_DOMAIN = None
 EMAIL_HOST_USER = 'testemail2081@gmail.com' #this is a testing account
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_PASSWORD = 'cfcsapp2017'
+EMAIL_HOST_PASSWORD = 'HollyStreet'
 EMAIL_PORT = 587

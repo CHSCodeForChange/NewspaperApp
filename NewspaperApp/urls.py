@@ -28,6 +28,7 @@ urlpatterns = [
     url(r'^login/$', auth_views.login, {'template_name': 'accounts/login.html'}, name='login'), #, 'authentication_form': LoginForm
     url(r'^logout/$', auth_views.logout, {'next_page' : '/accounts/logout_lander'}, name='logout'),    # Will redirect to the next page
     url(r'^accounts/', include('accounts.urls', namespace='accounts')),
+    url(r'^papers/', include('Newspaper.urls', namespace='papers')),
 ]
 
 if settings.DEBUG:

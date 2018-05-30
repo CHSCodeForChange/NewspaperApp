@@ -1,0 +1,25 @@
+{% extends "header.html" %}
+
+{% block content %}
+  <h1 class="display-1">Papers <a class="plus" href="createPaper">+</a></h1>
+  <div class="table-responsive">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>School</th>
+          <th>Website</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for paper in papers %}
+          <tr>
+            <td><a href="/papers/{{paper.id}}">{{paper.name}}</a></td>
+            <td>{{paper.school}}</td>
+            <td><a href="{{paper.website}}">{{paper.website}}</a></td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}
