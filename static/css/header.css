@@ -1,5 +1,5 @@
 a.navbar-brand {
-  color: white;
+  color: white !important;
   font-size: 180%;
   font-weight: 500;
 }

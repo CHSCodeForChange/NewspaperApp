@@ -29,6 +29,7 @@ urlpatterns = [
     url(r'^logout/$', auth_views.logout, {'next_page' : '/accounts/logout_lander'}, name='logout'),    # Will redirect to the next page
     url(r'^accounts/', include('accounts.urls', namespace='accounts')),
     url(r'^papers/', include('Newspaper.urls', namespace='papers')),
+    url(r'^api/', include('Newspaper.api.urls', namespace='api')),
 ]
 
 if settings.DEBUG:

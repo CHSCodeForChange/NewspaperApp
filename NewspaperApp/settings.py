@@ -20,7 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'uu*9!2m$(jw9xg7nwx7ex%05syeaks@e)et1sua6lo81*d$av6'
+SECRET_KEY = 'skey'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
     'accounts',
     'Newspaper',
 ]
@@ -125,6 +126,8 @@ USE_L10N = True
 USE_TZ = True
 
 CSRF_COOKIE_DOMAIN = None
+
+LOGIN_REDIRECT_URL = '/papers/'
 
 
 #email stuff

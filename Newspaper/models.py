@@ -35,6 +35,7 @@ class Section(models.Model):
         Paper,
         on_delete=models.CASCADE,
         null=True,
+        related_name='sections'
     )
 
     #this is the actual name of the section
