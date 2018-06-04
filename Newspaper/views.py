@@ -4,8 +4,8 @@ from .forms import *
 
 # Create your views here.
 def viewPapers(request):
-    papers = Paper.objects.filter(owner=request.user)
     if request.user.is_authenticated():
+        papers = Paper.objects.filter(owner=request.user)
         return render(request, 'papers/list_papers.html', {'papers': papers})
     else:
         return redirect('/login')
