@@ -134,5 +134,5 @@ LOGIN_REDIRECT_URL = '/papers/'
 EMAIL_HOST_USER = 'testemail2081@gmail.com' #this is a testing account
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_PASSWORD = 'HollyStreet'
+EMAIL_HOST_PASSWORD = 'TandemTricycle'
 EMAIL_PORT = 587
