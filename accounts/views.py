@@ -29,22 +29,10 @@ def signup(request):
         if form.is_valid():
             user = form.save(commit=False)
             # Sets the user to deactive until they confirm email
-            user.is_active = False
+            user.is_active = True
             # Saves the user to the server
             user.save()
-            # Gets the current domain in order to send the email
-            current_site = get_current_site(request)
-            # Sends the user an email based on the email template and the info passed in here
-            message = render_to_string('emails/activate_account.html', {
-                'user': user,
-                'domain': current_site.domain,
-                'uid': urlsafe_base64_encode(force_bytes(user.pk)),
-                'token': account_activation_token.make_token(user),
-            })
-            mail_subject = 'Activate your Sapphire account (named by Armaan Goel).'
-            to_email = form.cleaned_data.get('email')
-            email = EmailMessage(mail_subject, message, to=[to_email])
-            email.send()
+            
             return render(request, 'accounts/please_confirm.html')
     else:
         form = SignupForm()
